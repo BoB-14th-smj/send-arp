@@ -3,7 +3,7 @@ CXXFLAGS=-g -Wall
 
 all: $(TARGET)
 
-$(TARGET) : pcap-test.c
+$(TARGET) : main.cpp
 	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@ -lpcap
 
 clean:
