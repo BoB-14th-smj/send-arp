@@ -5,11 +5,17 @@
 
 
 void usage() {
-	printf("syntax: send-arp-test <interface>\n");
-	printf("sample: send-arp-test wlan0\n");
+	printf("syntax : send-arp <interface> <sender ip> <target ip> [<sender ip 2> <target ip 2> ...]\n");
+	printf("sample : send-arp wlan0 192.168.10.2 192.168.10.1");
+
+
 }
 int check_arg(int argc, char*argv){
-	if(argc != 2){
+	if(argc < 4 ){
+		usage();
+		return EXIT_FAILURE;
+	}
+	else if((argc % 2 != 0)){
 		usage();
 		return EXIT_FAILURE;
 	}
