@@ -21,3 +21,25 @@
 - https://codingfriend.tistory.com/18
 
 
+### find ip in linux
+- https://bono915.tistory.com/entry/Linux-%EB%A6%AC%EB%88%85%EC%8A%A4-IP-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95
+
+### string find
+- https://roadtosuccess.tistory.com/82
+
+### constructor
+- https://boycoding.tistory.com/244
+
+
+### stoi
+- https://dream-and-develop.tistory.com/57
+- https://blockdmask.tistory.com/333
+
+
+### enum
+- https://dragondeok.tistory.com/44
+- https://gitlab.com/gilgil/send-arp-test/-/blob/master/src/arphdr.h?ref_type=heads
+
+
+
+
