@@ -66,7 +66,7 @@ public:
         for(int i=0;i<6;i++){
             printf("%02x " , s_mac_[i]);
         }
-        printf("%08x", ntohs(e_type));
+        printf("%04x", ntohs(e_type));
 
 
     }
