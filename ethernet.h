@@ -18,6 +18,7 @@ private:
     uint16_t e_type;
 
 public:
+    Ethernet();
     Ethernet(uint8_t* dmac, uint8_t* smac, uint16_t e_type){
         set_dmac(dmac);
         set_smac(smac);

@@ -1,10 +1,12 @@
 #pragma once
+#pragma pack(1)
 #include <cstdint>
 #include <stdint.h>
 #include <stdio.h>
 #include <netinet/in.h>
 #include <string>
 #include "ethernet.h"
+
 
 
 uint32_t stoi_ip(std::string ip);
@@ -123,15 +125,12 @@ public:
 
 struct ArpPacket{
 private:
-    Ethernet* ethernet;
-    Arp* arp;
+    Ethernet ethernet;
+    Arp arp;
 
 public:
     ArpPacket();
-    ArpPacket(Ethernet* ethernet_, Arp* arp_){
-        ethernet = ethernet_;
-        arp = arp_;
-    };
+    ArpPacket(Ethernet* ethernet_, Arp* arp_) : ethernet(*ethernet_), arp(*arp_){};
 };
 
 
