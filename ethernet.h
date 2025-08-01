@@ -7,6 +7,8 @@
 
 void stoi_mac(std::string mac, uint8_t* smac);
 std::string get_my_mac(char* interface);
+
+
 struct Ethernet {
 private:
     uint8_t d_mac_[6];
@@ -15,14 +17,14 @@ private:
 
 public:
     Ethernet(uint8_t* dmac, uint8_t* smac, uint16_t e_type){
-        set_smac(smac);
         set_dmac(dmac);
+        set_smac(smac);
         set_e_type(e_type);
     };
 
     Ethernet(std::string dmac, std::string smac, uint16_t e_type){
-        set_smac(smac);
         set_dmac(dmac);
+        set_smac(smac);
         set_e_type(e_type);
     };
 
@@ -51,8 +53,20 @@ public:
         }
     }
 
-    void set_dmac(std::string tmac){
-        stoi_mac(tmac, d_mac_);
+    void set_dmac(std::string dmac){
+        stoi_mac(dmac, d_mac_);
+    }
+
+    void print_ethernet(void){
+        for(int i=0;i<6;i++){
+            printf("%02x " , d_mac_[i]);
+        }
+        for(int i=0;i<6;i++){
+            printf("%02x " , s_mac_[i]);
+        }
+        printf("%08x", ntohs(e_type));
+
+
     }
 
 };

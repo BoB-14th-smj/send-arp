@@ -32,7 +32,8 @@ void arp_request(char* dev, char* sender_ip, char* target_ip){
 	uint16_t ether_type = 0x0806;
 
 	Ethernet* ethernet = new Ethernet(d_mac_, s_mac_, ether_type);
-	Arp* arp = new Arp(d_mac_, s_mac_, sender_ip, target_ip);
+	ethernet->print_ethernet();
+	// Arp* arp = new Arp(d_mac_, s_mac_, sender_ip, target_ip);
 
 }
 
@@ -57,7 +58,7 @@ int main(int argc, char* argv[]) {
 
 
 
-/*
+
 	char* dev = argv[1];
 	char errbuf[PCAP_ERRBUF_SIZE];
 	pcap_t* pcap = pcap_open_live(dev, 0, 0, 0, errbuf);
@@ -68,5 +69,5 @@ int main(int argc, char* argv[]) {
 
 	attack_arp(argc -2 ,dev ,argv[2] , argv[3]);
 
-	pcap_close(pcap);*/
+	pcap_close(pcap);
 }

@@ -41,8 +41,7 @@ void stoi_mac(std::string mac, uint8_t* smac){
         smac[i] = b;
     }
 
-    for (int i=0;i<6;i++){
-        printf("%02X ", smac[i]);
-    }
-
+    // for (int i=0;i<6;i++){
+    //     printf("%02X ", smac[i]);
+    // }
 }
