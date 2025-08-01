@@ -2,9 +2,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include <pcap.h>
+#include <pcap/pcap.h>
 #include <stdlib.h>
 #include "ethernet.h"
 #include <string>
+#include <sys/types.h>
 #include "arp.h"
 
 
@@ -26,26 +28,34 @@ int check_arg(int argc, char*argv){
 	return EXIT_SUCCESS;
 }
 
-void arp_request(char* dev, char* sender_ip, char* target_ip){
+void arp_request(pcap_t* pcap, char* dev, char* sender_ip, char* target_ip){
 	std::string d_mac_  = "ff:ff:ff:ff:ff:ff";
 	std::string s_mac_ = get_my_mac(dev);
 	uint16_t ether_type = 0x0806;
 
 	Ethernet* ethernet = new Ethernet(d_mac_, s_mac_, ether_type);
-	ethernet->print_ethernet();
+	// ethernet->print_ethernet();
 
 	std::string my_ip = get_my_ip(dev);
-	printf("\n%s", my_ip.c_str());
-	// Arp* arp = new Arp(d_mac_, s_mac_, sender_ip, target_ip);
+	// printf("\n%s", my_ip.c_str());
+	uint16_t op_ = 0x0001;
+	Arp* arp = new Arp(s_mac_, d_mac_, sender_ip, target_ip, op_);
+	// arp->print_arp();
+	ArpPacket *packet = new ArpPacket(ethernet, arp);
+
+	if(pcap_sendpacket(pcap, (u_char*)packet , sizeof(*packet)) !=0){
+		printf("ERROR");
+		exit(1);
+	}
 
 }
 
 
 
 
-void attack_arp(int couple, char* dev, char* sender_ip, char* target_ip){
+void attack_arp(int couple, char* dev, char* sender_ip, char* target_ip, pcap_t* pcap){
 	//Send Arp Request
-	arp_request(dev, sender_ip, target_ip);
+	arp_request(pcap, dev, sender_ip, target_ip);
 
 
 
@@ -70,7 +80,7 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 	}
 
-	attack_arp(argc -2 ,dev ,argv[2] , argv[3]);
+	attack_arp(argc -2 ,dev ,argv[2] , argv[3],  pcap);
 
 	pcap_close(pcap);
 }
