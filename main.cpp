@@ -33,6 +33,9 @@ void arp_request(char* dev, char* sender_ip, char* target_ip){
 
 	Ethernet* ethernet = new Ethernet(d_mac_, s_mac_, ether_type);
 	ethernet->print_ethernet();
+
+	std::string my_ip = get_my_ip(dev);
+	printf("\n%s", my_ip.c_str());
 	// Arp* arp = new Arp(d_mac_, s_mac_, sender_ip, target_ip);
 
 }

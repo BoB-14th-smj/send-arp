@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include <netinet/in.h>
 #include <string>
+using namespace std;
 
 void stoi_mac(std::string mac, uint8_t* smac);
 std::string get_my_mac(char* interface);
+std::string get_command_output(string command);
 
 
 struct Ethernet {

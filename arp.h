@@ -8,6 +8,7 @@
 
 
 uint32_t stoi_ip(std::string ip);
+std::string get_my_ip(char* interface);
 struct Arp {
 private:
     uint16_t h_type;
