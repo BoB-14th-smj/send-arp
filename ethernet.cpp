@@ -1,4 +1,5 @@
 #include "ethernet.h"
+#include <cstdint>
 #include <stdio.h>
 #include <string>
 
@@ -30,4 +31,18 @@ string get_my_mac(char* interface){
     string result = get_command_output(command);
     // printf("%s", result.c_str());
     return result;
+}
+
+
+void stoi_mac(std::string mac, uint8_t* smac){
+    for(int i=0;i<6;i++){
+        std::string byte = mac.substr(i*3, 2);
+        uint8_t b = std::stoi(byte.c_str(), nullptr, 16);
+        smac[i] = b;
+    }
+
+    for (int i=0;i<6;i++){
+        printf("%02X ", smac[i]);
+    }
+
 }

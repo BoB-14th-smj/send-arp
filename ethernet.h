@@ -1,11 +1,12 @@
 #pragma once
+#include <cstdint>
 #include <stdint.h>
 #include <stdio.h>
 #include <netinet/in.h>
 #include <string>
 
-
-//Detail2~3. struct
+void stoi_mac(std::string mac, uint8_t* smac);
+std::string get_my_mac(char* interface);
 struct Ethernet {
 private:
     uint8_t d_mac_[6];
@@ -13,10 +14,49 @@ private:
     uint16_t e_type;
 
 public:
+    Ethernet(uint8_t* dmac, uint8_t* smac, uint16_t e_type){
+        set_smac(smac);
+        set_dmac(dmac);
+        set_e_type(e_type);
+    };
+
+    Ethernet(std::string dmac, std::string smac, uint16_t e_type){
+        set_smac(smac);
+        set_dmac(dmac);
+        set_e_type(e_type);
+    };
+
     uint8_t* get_d_mac(void) { return d_mac_; }
     uint8_t* get_s_mac(void) { return s_mac_; }
     uint16_t get_ether_type(void) { return ntohs(e_type); }
 
+    void set_e_type(uint16_t etype){
+        e_type = ntohs(etype);
+
+    }
+
+    void set_smac(uint8_t* smac){
+        for (int i=0;i<6;i++){
+            s_mac_[i] = smac[i];
+        }
+    }
+
+    void set_smac(std::string smac){
+        stoi_mac(smac, s_mac_);
+    }
+
+    void set_dmac(uint8_t* dmac){
+        for (int i=0;i<6;i++){
+            d_mac_[i] = dmac[i];
+        }
+    }
+
+    void set_dmac(std::string tmac){
+        stoi_mac(tmac, d_mac_);
+    }
+
 };
 
-std::string get_my_mac(char* interface);
+
+
+
