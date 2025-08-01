@@ -41,5 +41,14 @@
 - https://gitlab.com/gilgil/send-arp-test/-/blob/master/src/arphdr.h?ref_type=heads
 
 
+### sendpacket
+- https://www.sapphosound.com/archives/1923
+
+### delete padding
+- https://park-duck.tistory.com/entry/CCC-%EA%B5%AC%EC%A1%B0%EC%B2%B4-padding-%EC%A0%9C%EA%B1%B0feat-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%ED%81%AC%EA%B8%B0-%EA%B3%84%EC%82%B0
 
 
+### Initial List (GPT)
+- ArpPacket(Ethernet* ethernet_, Arp* arp_) : ethernet(*ethernet_), arp(*arp_){};
+- https://pandas-are-bears.tistory.com/16
+- https://blockdmask.tistory.com/510
