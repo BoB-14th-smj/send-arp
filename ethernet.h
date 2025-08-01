@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <netinet/in.h>
+#include <string>
 
 
 //Detail2~3. struct
@@ -18,3 +19,4 @@ public:
 
 };
 
+std::string get_my_mac(char* interface);

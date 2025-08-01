@@ -54,4 +54,4 @@ public:
 
 };
 
-std::string get_my_mac(char* interface);
+
