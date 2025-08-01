@@ -7,7 +7,7 @@
 #include "ethernet.h"
 
 
-
+uint32_t stoi_ip(std::string ip);
 struct Arp {
 private:
     uint16_t h_type;
@@ -27,6 +27,12 @@ private:
 public:
     Arp();
     Arp(uint8_t* smac, uint8_t* tmac, uint32_t sip, uint32_t tip){
+        set_smac(smac);
+        set_tmac(tmac);
+        set_sip(sip);
+        set_tip(tip);
+    }
+    Arp(std::string smac, std::string tmac, std::string sip, std::string tip){
         set_smac(smac);
         set_tmac(tmac);
         set_sip(sip);
@@ -61,11 +67,20 @@ public:
     }
 
     void set_sip(uint32_t sip){
+        s_ip_ = ntohl(sip);
+    }
 
+    void set_sip(std::string sip){
+        s_ip_ = ntohl(stoi_ip(sip));
     }
 
     void set_tip(uint32_t tip){
+        t_ip_ = ntohl(tip);
 
+    }
+
+    void set_tip(std::string tip){
+        t_ip_ = ntohl(stoi_ip(tip));
     }
 
 };

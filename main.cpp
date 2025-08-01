@@ -32,9 +32,7 @@ void arp_request(char* dev, char* sender_ip, char* target_ip){
 	uint16_t ether_type = 0x0806;
 
 	Ethernet* ethernet = new Ethernet(d_mac_, s_mac_, ether_type);
-
-
-
+	Arp* arp = new Arp(d_mac_, s_mac_, sender_ip, target_ip);
 
 }
 
