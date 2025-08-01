@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <pcap.h>
 #include <stdlib.h>
+#include "arp.h"
 
 
 void usage() {
@@ -22,10 +23,18 @@ int check_arg(int argc, char*argv){
 	return EXIT_SUCCESS;
 }
 
+
+void attack_arp(int argc, char* argv){
+
+
+}
+
 int main(int argc, char* argv[]) {
 	if(check_arg(argc, *argv)){
 		return EXIT_FAILURE;
 	}
+
+
 
 	char* dev = argv[1];
 	char errbuf[PCAP_ERRBUF_SIZE];
@@ -37,7 +46,12 @@ int main(int argc, char* argv[]) {
 
 
 
-	printf("gh");
+
+
+
+
+
+	get_my_mac(argv[1]);
 
 	pcap_close(pcap);
 }

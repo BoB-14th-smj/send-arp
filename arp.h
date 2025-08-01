@@ -3,7 +3,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <netinet/in.h>
-#include <string.h>
+#include <string>
+
 
 
 struct Arp {
@@ -51,10 +52,6 @@ public:
     }
 
 
+};
 
-
-
-
-
-
-}
+std::string get_my_mac(char* interface);
