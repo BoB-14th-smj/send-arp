@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <netinet/in.h>
 #include <string>
+#include "ethernet.h"
 
 
 
@@ -24,6 +25,14 @@ private:
 
 
 public:
+    Arp();
+    Arp(uint8_t* smac, uint8_t* tmac, uint32_t sip, uint32_t tip){
+        set_smac(smac);
+        set_tmac(tmac);
+        set_sip(sip);
+        set_tip(tip);
+    }
+
     uint16_t get_operation(void) { return operaton; }
     uint8_t* get_smac(void) { return s_mac_; }
     uint8_t* get_tmac(void) { return t_mac_; }
@@ -37,10 +46,18 @@ public:
         }
     }
 
-    void set_dmac(uint8_t* tmac){
+    void set_smac(std::string smac){
+        stoi_mac(smac, s_mac_);
+    }
+
+    void set_tmac(uint8_t* tmac){
         for (int i=0;i<6;i++){
             t_mac_[i] = tmac[i];
         }
+    }
+
+    void set_tmac(std::string tmac){
+        stoi_mac(tmac, t_mac_);
     }
 
     void set_sip(uint32_t sip){
@@ -51,7 +68,19 @@ public:
 
     }
 
+};
 
+struct ArpPacket{
+private:
+    Ethernet* ethernet;
+    Arp* arp;
+
+public:
+    ArpPacket();
+    ArpPacket(Ethernet* ethernet_, Arp* arp_){
+        ethernet = ethernet_;
+        arp = arp_;
+    };
 };
 
 

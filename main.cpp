@@ -1,7 +1,10 @@
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <pcap.h>
 #include <stdlib.h>
+#include "ethernet.h"
+#include <string>
 #include "arp.h"
 
 
@@ -23,8 +26,26 @@ int check_arg(int argc, char*argv){
 	return EXIT_SUCCESS;
 }
 
+void arp_request(char* dev, char* sender_ip, char* target_ip){
+	std::string d_mac_  = "ff:ff:ff:ff:ff:ff";
+	std::string s_mac_ = get_my_mac(dev);
+	uint16_t ether_type = 0x0806;
 
-void attack_arp(int argc, char* argv){
+	Ethernet* ethernet = new Ethernet(d_mac_, s_mac_, ether_type);
+
+
+
+
+}
+
+
+
+
+void attack_arp(int couple, char* dev, char* sender_ip, char* target_ip){
+	//Send Arp Request
+	arp_request(dev, sender_ip, target_ip);
+
+
 
 
 }
@@ -36,6 +57,9 @@ int main(int argc, char* argv[]) {
 
 
 
+
+
+/*
 	char* dev = argv[1];
 	char errbuf[PCAP_ERRBUF_SIZE];
 	pcap_t* pcap = pcap_open_live(dev, 0, 0, 0, errbuf);
@@ -44,14 +68,7 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 	}
 
+	attack_arp(argc -2 ,dev ,argv[2] , argv[3]);
 
-
-
-
-
-
-
-	get_my_mac(argv[1]);
-
-	pcap_close(pcap);
+	pcap_close(pcap);*/
 }
