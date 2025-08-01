@@ -27,17 +27,20 @@ private:
 
 public:
     Arp();
-    Arp(uint8_t* smac, uint8_t* tmac, uint32_t sip, uint32_t tip){
+    Arp(uint8_t* smac, uint8_t* tmac, uint32_t sip, uint32_t tip, uint16_t op_){
         set_smac(smac);
         set_tmac(tmac);
         set_sip(sip);
         set_tip(tip);
+        set_others(op_);
     }
-    Arp(std::string smac, std::string tmac, std::string sip, std::string tip){
+    Arp(std::string smac, std::string tmac, std::string sip, std::string tip, uint16_t op_){
         set_smac(smac);
         set_tmac(tmac);
         set_sip(sip);
         set_tip(tip);
+        set_others(op_);
+
     }
 
     uint16_t get_operation(void) { return operaton; }
@@ -84,7 +87,39 @@ public:
         t_ip_ = ntohl(stoi_ip(tip));
     }
 
+    void set_others(uint16_t op_){
+        h_type = ntohs(0x0001);
+        p_type = ntohs(0x0800);
+        h_length = 0x6;
+        p_length = 0x4;
+        operaton = ntohs(op_);
+    }
+
+    void print_arp(void){
+        printf("%04x ", h_type);
+        printf("%04x ", p_type);
+        printf("%02x ", h_length);
+        printf("%02x ", p_length);
+
+        printf("%04x ", operaton);
+        for (int i=0;i<6;i++){
+            printf("%02x ", s_mac_[i]);
+        }
+        printf("%02x %02x %02x %02x ", (s_ip_ >> 24) & 0xFF, (s_ip_ >> 16) & 0xFF, (s_ip_ >> 8) & 0xFF, (s_ip_) & 0xFF);
+
+        printf("%04x ", operaton);
+        for (int i=0;i<6;i++){
+            printf("%02x ", t_mac_[i]);
+        }
+        printf("%02x %02x %02x %02x ", (t_ip_ >> 24) & 0xFF, (t_ip_ >> 16) & 0xFF, (t_ip_ >> 8) & 0xFF, (t_ip_) & 0xFF);
+
+
+    }
+
+
+
 };
+
 
 struct ArpPacket{
 private:

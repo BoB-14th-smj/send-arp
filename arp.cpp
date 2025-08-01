@@ -1,6 +1,5 @@
 #include "arp.h"
 #include "ethernet.h"
-#include <netinet/in.h>
 
 using namespace std;
 
@@ -10,13 +9,24 @@ void construct_arp_packet(Ethernet* ethernet, Arp* arp){
 }
 
 uint32_t stoi_ip(std::string ip){
+    // printf("%s\n", ip.c_str());
     uint32_t result = 0;
-    for(int i=0;i<4;i++){
-        std::string byte = ip.substr(i*4, 3);
-        result = std::stoi(byte.c_str(), nullptr, 16);
+    uint32_t pos = 0;
+    uint32_t npos=0;
+    for(int i=0;i<3;i++){
+        npos = ip.find(".", pos);
+        std::string byte = ip.substr(pos, npos-pos);
+        // printf("%s\n", byte.c_str());
+        result += std::stoi(byte.c_str(), nullptr, 16);
+        pos = npos+1;
         result  = result << 8;
     }
-    printf("%x", result);
+    std::string byte = ip.substr(pos);
+    // printf("%s\n", byte.c_str());
+    result += std::stoi(byte.c_str(), nullptr, 16);
+
+
+    // printf("%x\n", result);
     return result;
 
 }
