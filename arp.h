@@ -37,8 +37,14 @@ public:
         set_others(op_);
     }
     Arp(std::string smac, std::string tmac, std::string sip, std::string tip, uint16_t op_){
+        if(op_ == 0x1 && tmac == "ff:ff:ff:ff:ff:ff"){
+            std::string zero_mac = "00:00:00:00:00:00";
+            set_tmac(zero_mac);
+        }else{
+            set_tmac(tmac);
+        }
+
         set_smac(smac);
-        set_tmac(tmac);
         set_sip(sip);
         set_tip(tip);
         set_others(op_);
