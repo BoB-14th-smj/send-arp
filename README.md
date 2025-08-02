@@ -1,3 +1,21 @@
+# 영상
+[유튜브 영상 링크](https://www.youtube.com/watch?v=GT6TtJke1vo)
+
+## 실험 설명
+- 1. BROADCAST로 sender 의 MAC 주소를 받아온다(이때, 나의 IP주소 필요)
+- 2. SENDER 의 ARP 테이블에서 Target 의 MAC주소를 내걸로 보내는 REPLY를 보낸다.
+- 3. 결과값을 확인한다.
+ 
+
+# 영상 설명
+- 성밍쟁 앙잉퐁 172.20.10.1 핫스팟에 호스트PC 172.20.10.2, GUEST(VM) 172.20.10.5 의 각 MAC주소를 알아내고 메모장에 적는다
+- GUEST에서 Host의 ARP 테이블에서 게이트웨이의 MAC주소를 변조한다.
+- 호스트에서 arp -a 로 변조된 것을 확인한다
+- 호스트에서 ping 을 날렸을 때, 게스트 wireshark 로 잡히는지 확인한다.
+  
+
+
+
 # Reference
 ### EXIT_FAILURE & EXIT_SUCCESS
 - https://learn.microsoft.com/ko-kr/cpp/c-runtime-library/exit-success-exit-failure?view=msvc-170
