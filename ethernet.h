@@ -36,7 +36,7 @@ public:
     uint16_t get_ether_type(void) { return ntohs(e_type); }
 
     void set_e_type(uint16_t etype){
-        e_type = ntohs(etype);
+        e_type = (etype);
 
     }
 
