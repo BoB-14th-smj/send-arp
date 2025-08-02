@@ -17,13 +17,13 @@ uint32_t stoi_ip(std::string ip){
         npos = ip.find(".", pos);
         std::string byte = ip.substr(pos, npos-pos);
         // printf("%s\n", byte.c_str());
-        result += std::stoi(byte.c_str(), nullptr, 16);
+        result |= std::stoi(byte.c_str(), nullptr, 10);
         pos = npos+1;
         result  = result << 8;
     }
     std::string byte = ip.substr(pos);
     // printf("%s\n", byte.c_str());
-    result += std::stoi(byte.c_str(), nullptr, 16);
+    result += std::stoi(byte.c_str(), nullptr, 10);
 
 
     // printf("%x\n", result);
