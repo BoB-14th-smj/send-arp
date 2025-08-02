@@ -30,9 +30,7 @@ int check_arg(int argc, char*argv){
 	return EXIT_SUCCESS;
 }
 
-void arp_request(pcap_t* pcap, char* dev, char* sender_ip, char* target_ip){
-	std::string d_mac_  = "ff:ff:ff:ff:ff:ff";
-	std::string s_mac_ = get_my_mac(dev);
+void arp_request(pcap_t* pcap, char* dev, std::string d_mac_, std::string s_mac_, char* sender_ip, char* target_ip){
 	uint16_t ether_type = 0x0806;
 
 	Ethernet* ethernet = new Ethernet(d_mac_, s_mac_, ether_type);
@@ -41,10 +39,10 @@ void arp_request(pcap_t* pcap, char* dev, char* sender_ip, char* target_ip){
 	std::string my_ip = get_my_ip(dev);
 	// printf("\n%s", my_ip.c_str());
 	uint16_t op_ = 0x0001;
-	Arp* arp = new Arp(s_mac_, d_mac_, sender_ip, target_ip, op_);
+	Arp* arp = new Arp(s_mac_, d_mac_, my_ip, target_ip, op_);
 	// arp->print_arp();
 	ArpPacket *packet = new ArpPacket(ethernet, arp);
-
+ //
 	if(pcap_sendpacket(pcap, (u_char*)packet , sizeof(*packet)) !=0){
 		printf("ERROR");
 		exit(1);
@@ -57,7 +55,10 @@ void arp_request(pcap_t* pcap, char* dev, char* sender_ip, char* target_ip){
 
 void attack_arp(int couple, char* dev, char* sender_ip, char* target_ip, pcap_t* pcap){
 	//Send Arp Request
-	arp_request(pcap, dev, sender_ip, target_ip);
+	std::string d_mac_  = "ff:ff:ff:ff:ff:ff";
+	std::string s_mac_ = get_my_mac(dev);
+	std::string my_ip = get_my_ip(dev);
+	arp_request(pcap, dev, d_mac_, s_mac_, (char*)my_ip.c_str(), target_ip);
 
 
 

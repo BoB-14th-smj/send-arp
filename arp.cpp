@@ -34,10 +34,15 @@ uint32_t stoi_ip(std::string ip){
 string get_my_ip(char* interface){
     string if_ = interface;
 
-    string command =  "hostname -I";
+    // string command =  "hostname -I";
+    string command = "ip -4 addr show " + if_ ;
     string result = get_command_output(command);
-    size_t index = result.find(" ");
-    string final = result.substr(0, index);
+    uint8_t index = result.find("inet");
+    // printf("\n\n\n%d", index);
+    size_t index2 = result.find("/" ,index);
+    string final = result.substr(index+4, index2 - index);
+    index2 = final.find("/");
+    final = final.substr(0, index2);
     // printf("%s", final.c_str());
     return final;
 }
